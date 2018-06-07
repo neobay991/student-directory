@@ -5,14 +5,18 @@ def input_students
   students = []
   # get the first name
   name = gets.chomp
-  # while the name is not empty, repeat this code
-  while !name.empty? do
+  # get the country of birth
+  puts "Please enter country of birth"
+  country = gets.chomp
+  # while the name and country of birth is not empty, repeat this code
+  while !name.empty? && !country.empty? do
     # add the student hash to the array
-    students << {name: name, cohort: :november}
+    students << {name: name, country_of_birth: country, cohort: :november}
     # increment the counter so we can input a number before the name of each student
     puts "Now we have #{students.count} students"
-    # get another name fron the user
+    # get another name and country of birth fron the user
     name = gets.chomp
+    country = gets.chomp
   end
 # return the array of students
   students
@@ -25,7 +29,7 @@ def print(students)
   counter = 0
   while counter < students.length do
     students.each.with_index(1) do |student, index|
-        puts "#{student[:name]} (#{student[:cohort]} cohort)"
+        puts "#{student[:name]} , Country of birth: #{student[:country_of_birth]} (#{student[:cohort]} cohort)"
         counter = counter + 1
     end
   end
