@@ -22,8 +22,12 @@ def print_header
   puts "------------"
 end
 def print(students)
-  students.each.with_index(1) do |student, index|
-      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+  counter = 0
+  while counter < students.length do
+    students.each.with_index(1) do |student, index|
+        puts "#{student[:name]} (#{student[:cohort]} cohort)"
+        counter = counter + 1
+    end
   end
 end
 # this method  prints only students whose name begins with the letter A
