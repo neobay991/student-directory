@@ -23,6 +23,7 @@ def print_header
 end
 
 def print(students)
+  # only print student list if at least one student exists
   if students.count > 0
     students.each do |student|
       puts "#{student[:name]} (#{student[:cohort]} cohort)"
