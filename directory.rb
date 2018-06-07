@@ -8,15 +8,22 @@ def input_students
   # get the country of birth
   puts "Please enter country of birth"
   country = gets.chomp
+  # get the cohort
+  puts "Please enter your cohort"
+  cohort = gets.chomp
+  # convert to symbol
+  cohort.to_sym
   # while the name and country of birth is not empty, repeat this code
-  while !name.empty? && !country.empty? do
+  while !name.empty? && !country.empty? && !cohort.empty? do
     # add the student hash to the array
-    students << {name: name, country_of_birth: country, cohort: :november}
+    students << {name: name, country_of_birth: country, cohort: cohort}
     # increment the counter so we can input a number before the name of each student
     puts "Now we have #{students.count} students"
     # get another name and country of birth fron the user
     name = gets.chomp
     country = gets.chomp
+    cohort = gets.chomp
+    cohort.to_sym
   end
 # return the array of students
   students
