@@ -22,8 +22,8 @@ def input_students
   students
 end
 def print_header
-  puts "The students of Villain Academy"
-  puts "------------"
+  puts "The students of Villain Academy".center(50)
+  puts "------------".center(50)
 end
 def print(students)
   counter = 0
@@ -53,14 +53,15 @@ def print_student_with_character_limit(students)
   end
 end
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  puts "------------".center(50)
+  puts "Overall, we have #{students.count} great students".center(50)
 end
 # nothing happens until we call the methods
 students = input_students
 print_header
 print(students)
-puts "------------"
+puts "------------".center(50)
 print_student_one_letter(students)
-puts "------------"
+puts "------------".center(50)
 print_student_with_character_limit(students)
 print_footer(students)
