@@ -26,6 +26,7 @@ def print(students)
       puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
+# this method  prints only students whose name begins with the letter A
 def print_student_one_letter(students)
   students.each.with_index(1) do |student, index|
     if student[:name][0] == "a"
