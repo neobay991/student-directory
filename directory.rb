@@ -70,7 +70,7 @@ def print_by_cohort(students)
     students.each.with_index(1) do |student, index|
       if student[:cohort] == "november"
         puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-      else
+      else   
         puts "There are no students in the November cohort"
       end
       counter = counter + 1
