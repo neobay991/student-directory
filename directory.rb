@@ -50,12 +50,25 @@ def print_student_one_letter(students)
     end
   end
 end
-# this method  prints only students whose name are less than 12 characters
+# this method prints only students whose name are less than 12 characters
 def print_student_with_character_limit(students)
   puts "Student whose name are less than 12 characters:"
   students.each.with_index(1) do |student, index|
     if student[:name].length < 12
       puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
+  end
+end
+# this method prints only students in the November cohort
+def print_by_cohort(students)
+  counter = 0
+  puts "Students in November cohort:"
+  while counter < students.length do
+    students.each.with_index(1) do |student, index|
+      if student[:cohort] == "november"
+        puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+        counter = counter + 1
+      end
     end
   end
 end
@@ -71,4 +84,6 @@ puts "------------".center(50)
 print_student_one_letter(students)
 puts "------------".center(50)
 print_student_with_character_limit(students)
+puts "------------".center(50)
+print_by_cohort(students)
 print_footer(students)
