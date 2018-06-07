@@ -3,14 +3,17 @@ def input_students
   puts "To finish, just hit return twice"
   # create an empty array
   students = []
-  # get the first name
-  name = gets.chomp
-  # get the country of birth
+  # get the first name. Use the .delete method instead chomp to remove carriage return characters \r\n
+  name = gets
+  name.delete!("\r\n")
+  # get the country of birth. Use the .delete method instead chomp to remove carriage return characters \r\n
   puts "Please enter country of birth"
-  country = gets.chomp
-  # get the cohort
+  country = gets
+  country.delete!("\r\n")
+  # get the cohort. Use the .delete method instead chomp to remove carriage return characters \r\n
   puts "Please enter your cohort"
-  cohort = gets.chomp
+  cohort = gets
+  cohort.delete!("\r\n")
   # convert to symbol
   cohort.to_sym
   # while the name and country of birth is not empty, repeat this code
@@ -23,9 +26,12 @@ def input_students
       puts "Now we have #{students.count} student"
     end
     # get another name and country of birth fron the user
-    name = gets.chomp
-    country = gets.chomp
-    cohort = gets.chomp
+    name = gets
+    name.delete!("\r\n")
+    country = gets
+    country.delete!("\r\n")
+    cohort = gets
+    cohort.delete!("\r\n")
     cohort.to_sym
   end
 # return the array of students
@@ -39,7 +45,7 @@ def print(students)
   counter = 0
   while counter < students.length do
     students.each.with_index(1) do |student, index|
-        puts "#{student[:name]} , Country of birth: #{student[:country_of_birth]} (#{student[:cohort]} cohort)"
+        puts "#{student[:name]}, country of birth: #{student[:country_of_birth]} (#{student[:cohort]} cohort)"
         counter = counter + 1
     end
   end
@@ -70,8 +76,6 @@ def print_by_cohort(students)
     students.each.with_index(1) do |student, index|
       if student[:cohort] == "november"
         puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-      else   
-        puts "There are no students in the November cohort"
       end
       counter = counter + 1
     end
