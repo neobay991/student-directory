@@ -28,10 +28,19 @@ def print(students)
 end
 # this method  prints only students whose name begins with the letter A
 def print_student_one_letter(students)
+  puts "Student names beginning with the letter 'A':"
   students.each.with_index(1) do |student, index|
     if student[:name][0] == "a"
-      puts "------------"
-      puts "#{index}. Student names beginning with the letter 'A' - #{student[:name]} (#{student[:cohort]} cohort)"
+      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
+  end
+end
+# this method  prints only students whose name are less than 12 characters
+def print_student_with_character_limit(students)
+  puts "Student whose name are less than 12 characters:"
+  students.each.with_index(1) do |student, index|
+    if student[:name].length < 12
+      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
 end
@@ -42,5 +51,8 @@ end
 students = input_students
 print_header
 print(students)
+puts "------------"
 print_student_one_letter(students)
+puts "------------"
+print_student_with_character_limit(students)
 print_footer(students)
