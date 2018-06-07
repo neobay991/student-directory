@@ -17,8 +17,11 @@ def input_students
   while !name.empty? && !country.empty? && !cohort.empty? do
     # add the student hash to the array
     students << {name: name, country_of_birth: country, cohort: cohort}
-    # increment the counter so we can input a number before the name of each student
-    puts "Now we have #{students.count} students"
+    if students.length > 1
+      puts "Now we have #{students.count} students"
+    else
+      puts "Now we have #{students.count} student"
+    end
     # get another name and country of birth fron the user
     name = gets.chomp
     country = gets.chomp
@@ -67,8 +70,10 @@ def print_by_cohort(students)
     students.each.with_index(1) do |student, index|
       if student[:cohort] == "november"
         puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-        counter = counter + 1
+      else
+        puts "There are no students in the November cohort"
       end
+      counter = counter + 1
     end
   end
 end
