@@ -5,15 +5,15 @@ def input_students
   # create an empty array
   #students = []
   # get the first name. Use the .delete method instead chomp to remove carriage return characters \r\n
-  name = gets
+  name = STDIN.gets
   name.delete!("\r\n")
   # get the country of birth. Use the .delete method instead chomp to remove carriage return characters \r\n
   puts "Please enter country of birth"
-  country = gets
+  country = STDIN.gets
   country.delete!("\r\n")
   # get the cohort. Use the .delete method instead chomp to remove carriage return characters \r\n
   puts "Please enter your cohort"
-  cohort = gets
+  cohort = STDIN.gets
   cohort.delete!("\r\n")
   # convert to symbol
   cohort.to_sym
@@ -27,11 +27,11 @@ def input_students
       puts "Now we have #{@students.count} student"
     end
     # get another name and country of birth fron the user
-    name = gets
+    name = STDIN.gets
     name.delete!("\r\n")
-    country = gets
+    country = STDIN.gets
     country.delete!("\r\n")
-    cohort = gets
+    cohort = STDIN.gets
     cohort.delete!("\r\n")
     cohort.to_sym
   end
@@ -96,7 +96,7 @@ def interactive_menu
     # 1 print the menu and ask the user what to do
     print_menu
     # 2 read the input and save it into a variable
-    selection = gets.chomp
+    selection = STDIN.gets.chomp
     # 3 do what the user has asked
       case selection
         when "1"
@@ -136,15 +136,28 @@ def save_students
   end
   file.close
 end
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
-      @students << {name: name, cohort: cohort.to_sym}
+    @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
 end
+def try_load_students
+  filename = ARGV.first # first argument from the command line
+  return if filename.nil? # get out of the method if it isn't given
+  if File.exists?(filename) # if it exists
+    load_students(filename)
+     puts "Loaded #{@students.count} from #{filename}"
+  else # if it doesn't exist
+    puts "Sorry, #{filename} doesn't exist."
+    exit # quit the program
+  end
+end
+
 # nothing happens until we call the methods
+try_load_students
 interactive_menu
 #students = input_students
 #print_header
