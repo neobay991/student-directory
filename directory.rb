@@ -1,4 +1,37 @@
+# this instance variable (array) is accessible to all methods
 @students = []
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "3 Save the list to students.csv"
+  puts "4 Load the list from students.csv"
+  puts "9. Exit" # 9 because we'll be adding more items
+end
+def interactive_menu
+  loop do
+    # 1 print the menu and ask the user what to do
+    print_menu
+    # 2 read the input and save it into a variable
+    process(STDIN.gets.chomp)
+  end
+end
+def process(selection)
+  case selection
+  when "1"
+    input_students
+  when "2"
+    show_students
+  when "9"
+    exit # this will cause the program to terminate
+  when "3"
+    save_students
+  when "4"
+    load_students
+  else
+    puts "I don't know what you meant, try again"
+  end
+end
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -35,14 +68,12 @@ def input_students
     cohort.delete!("\r\n")
     cohort.to_sym
   end
-# return the array of students
-  #students
 end
 def print_header
   puts "The students of Villain Academy".center(50)
   puts "------------".center(50)
 end
-def print
+def print_student_list
   counter = 0
   while counter < @students.length do
     @students.each.with_index(1) do |student, index|
@@ -51,36 +82,10 @@ def print
     end
   end
 end
-# this method  prints only students whose name begins with the letter A
-def print_student_one_letter(students)
-  puts "Student names beginning with the letter 'A':"
-  students.each.with_index(1) do |student, index|
-    if student[:name][0] == "a"
-      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-    end
-  end
-end
-# this method prints only students whose name are less than 12 characters
-def print_student_with_character_limit(students)
-  puts "Student whose name are less than 12 characters:"
-  students.each.with_index(1) do |student, index|
-    if student[:name].length < 12
-      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-    end
-  end
-end
-# this method prints only students in the November cohort
-def print_by_cohort(students)
-  counter = 0
-  puts "Students in November cohort:"
-  while counter < students.length do
-    students.each.with_index(1) do |student, index|
-      if student[:cohort] == "november"
-        puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
-      end
-      counter = counter + 1
-    end
-  end
+def show_students
+  print_header
+  print_student_list
+  print_footer
 end
 def print_footer
   puts "------------".center(50)
@@ -89,43 +94,6 @@ def print_footer
   else
     puts "Overall, we have #{@students.count} great student".center(50)
   end
-end
-def interactive_menu
-  students = []
-  loop do
-    # 1 print the menu and ask the user what to do
-    print_menu
-    # 2 read the input and save it into a variable
-    selection = STDIN.gets.chomp
-    # 3 do what the user has asked
-      case selection
-        when "1"
-          students = input_students
-        when "2"
-          show_students
-        when "3"
-          save_students
-        when "4"
-          load_students
-        when "9"
-          exit # this will cause the program to terminate
-        else
-          puts "I don't know meant, try again"
-      end
-    # repeat from step 1
-    end
-end
-def print_menu
-  puts "1. Input the students"
-  puts "2. Show the students"
-  puts "3 Save the list to students.csv"
-  puts "4 Load the list from students.csv"
-  puts "9. Exit" # 9 because we'll be adding more items
-end
-def show_students
-  print_header
-  print
-  print_footer
 end
 def save_students
   file = File.open("students.csv", "w")
@@ -159,13 +127,38 @@ end
 # nothing happens until we call the methods
 try_load_students
 interactive_menu
-#students = input_students
-#print_header
-#print(students)
-#puts "------------".center(50)
-#print_student_one_letter(students)
-#puts "------------".center(50)
-#print_student_with_character_limit(students)
-#puts "------------".center(50)
-#print_by_cohort(students)
-#print_footer(students)
+
+=begin
+These methods need refactoring which can further enhance the app outside of the scope of this excercise, so commented these methods out for now
+# this method  prints only students whose name begins with the letter A
+def print_student_one_letter(students)
+  puts "Student names beginning with the letter 'A':"
+  students.each.with_index(1) do |student, index|
+    if student[:name][0] == "a"
+      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
+  end
+end
+# this method prints only students whose name are less than 12 characters
+def print_student_with_character_limit(students)
+  puts "Student whose name are less than 12 characters:"
+  students.each.with_index(1) do |student, index|
+    if student[:name].length < 12
+      puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
+  end
+end
+# this method prints only students in the November cohort
+def print_by_cohort(students)
+  counter = 0
+  puts "Students in November cohort:"
+  while counter < students.length do
+    students.each.with_index(1) do |student, index|
+      if student[:cohort] == "november"
+        puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
+      end
+      counter = counter + 1
+    end
+  end
+end
+=end
