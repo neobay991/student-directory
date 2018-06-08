@@ -83,7 +83,11 @@ def print_by_cohort(students)
 end
 def print_footer(students)
   puts "------------".center(50)
-  puts "Overall, we have #{students.count} great students".center(50)
+  if students.length > 1
+    puts "Overall, we have #{students.count} great students".center(50)
+  else
+    puts "Overall, we have #{students.count} great student".center(50)
+  end
 end
 def interactive_menu
   students = []
