@@ -58,7 +58,7 @@ def print_student_one_letter(students)
       puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
-end
+end 
 # this method prints only students whose name are less than 12 characters
 def print_student_with_character_limit(students)
   puts "Student whose name are less than 12 characters:"
