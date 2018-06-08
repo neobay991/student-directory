@@ -1,8 +1,9 @@
+@students = []
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   # create an empty array
-  students = []
+  #students = []
   # get the first name. Use the .delete method instead chomp to remove carriage return characters \r\n
   name = gets
   name.delete!("\r\n")
@@ -19,11 +20,11 @@ def input_students
   # while the name and country of birth is not empty, repeat this code
   while !name.empty? && !country.empty? && !cohort.empty? do
     # add the student hash to the array
-    students << {name: name, country_of_birth: country, cohort: cohort}
-    if students.length > 1
-      puts "Now we have #{students.count} students"
+    @students << {name: name, country_of_birth: country, cohort: cohort}
+    if @students.length > 1
+      puts "Now we have #{@students.count} students"
     else
-      puts "Now we have #{students.count} student"
+      puts "Now we have #{@students.count} student"
     end
     # get another name and country of birth fron the user
     name = gets
@@ -35,16 +36,16 @@ def input_students
     cohort.to_sym
   end
 # return the array of students
-  students
+  #students
 end
 def print_header
   puts "The students of Villain Academy".center(50)
   puts "------------".center(50)
 end
-def print(students)
+def print
   counter = 0
-  while counter < students.length do
-    students.each.with_index(1) do |student, index|
+  while counter < @students.length do
+    @students.each.with_index(1) do |student, index|
         puts "#{student[:name]}, country of birth: #{student[:country_of_birth]} (#{student[:cohort]} cohort)"
         counter = counter + 1
     end
@@ -58,7 +59,7 @@ def print_student_one_letter(students)
       puts "#{index}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
-end 
+end
 # this method prints only students whose name are less than 12 characters
 def print_student_with_character_limit(students)
   puts "Student whose name are less than 12 characters:"
@@ -81,21 +82,19 @@ def print_by_cohort(students)
     end
   end
 end
-def print_footer(students)
+def print_footer
   puts "------------".center(50)
-  if students.length > 1
-    puts "Overall, we have #{students.count} great students".center(50)
+  if @students.length > 1
+    puts "Overall, we have #{@students.count} great students".center(50)
   else
-    puts "Overall, we have #{students.count} great student".center(50)
+    puts "Overall, we have #{@students.count} great student".center(50)
   end
 end
 def interactive_menu
   students = []
   loop do
     # 1 print the menu and ask the user what to do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit" #9 because we will be adding more steps
+    print_menu
     # 2 read the input and save it into a variable
     selection = gets.chomp
     # 3 do what the user has asked
@@ -103,9 +102,7 @@ def interactive_menu
         when "1"
           students = input_students
         when "2"
-          print_header
-          print(students)
-          print_footer(students)
+          show_students
         when "9"
           exit # this will cause the program to terminate
         else
@@ -113,6 +110,16 @@ def interactive_menu
       end
     # repeat from step 1
     end
+end
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit" # 9 because we'll be adding more items
+end
+def show_students
+  print_header
+  print
+  print_footer
 end
 # nothing happens until we call the methods
 interactive_menu
